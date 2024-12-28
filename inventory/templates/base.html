@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Сайт</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<div class="ui inverted menu">
+    <div class="ui container">
+        <a href="#" class="header item">Мой Сайт</a>
+        <div class="right menu">
+            <a href="#" class="item">Главная</a>
+            <a href="#" class="item">О нас</a>
+            <a href="#" class="item">Контакты</a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="ui container" style="margin-top: 20px;">
+    {% block content %}{% endblock %}
+</div>
+
+<!-- Footer -->
+<div class="ui inverted vertical footer segment">
+    <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+            <div class="three wide column">
+                <h4 class="ui inverted header">О нас</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Наша команда</a>
+                    <a href="#" class="item">Наша миссия</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Ссылки</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Главная</a>
+                    <a href="#" class="item">Контакты</a>
+                </div>
+            </div>
+            <div class="ten wide column">
+                <h4 class="ui inverted header">Контакты</h4>
+                <p>Примерный адрес: ул. Примерная, 123</p>
+                <p>Телефон: +7 (123) 456-78-90</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+</body>
+</html>
