@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} {{ product.name }} {% endblock title %}
+
+{% block content %}
+    <div class="ui container">
+        <h1 class="ui header">{{ product.name }}</h1>
+        
+        <div class="ui stackable grid">
+            <div class="eight wide column">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="ui fluid image">
+            </div>
+            <div class="eight wide column">
+                <h2 class="ui header">Описание</h2>
+                <p>{{ product.text }}</p>
+                <h3 class="ui header">Цена: {{ product.price|floatformat:2 }} ₽</h3>
+                <div class="ui buttons">
+                    <button class="ui primary button">Добавить в корзину</button>
+                    <button class="ui button">Купить сейчас</button>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="ui header">Характеристики</h2>
+        <ul class="ui list">
+            <li>Белки: {{ product.protein }} г</li>
+            <li>Жиры: {{ product.fat }} г</li>
+            <li>Калории: {{ product.callories }} ккал</li>
+            <li>Доступное количество: {{ product.quantity }}</li>
+        </ul>
+    </div>
+{% endblock content %}

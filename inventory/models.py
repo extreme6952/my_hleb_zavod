@@ -4,6 +4,7 @@ from unidecode import unidecode
 from django.urls import reverse
 from easy_thumbnails.fields import ThumbnailerImageField
 
+
 class Category(models.Model):
 
     name = models.CharField(max_length=200,
