@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
 
+from django.conf.global_settings import LOGIN_REDIRECT_URL
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'inventory.apps.InventoryConfig',
+    'account.apps.AccountConfig',
     'easy_thumbnails',
 ]
 
@@ -113,6 +116,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOGIN_URL = 'account:login'
+
+LOGIN_REDIRECT_URL = 'account:profile_worker'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -132,3 +138,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = 'media/'
+
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user' : lambda u:reverse_lazy('account:profile_worker',
+                                        args=[u.username])
+}

@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль работника{% endblock title %}
+
+{% block content %}
+<div class="ui container" style="margin-top: 20px;">
+    <h2 class="ui teal header">Профиль работника</h2>
+
+    <div class="ui grid">
+        <div class="twelve wide column">
+            <div class="ui card">
+                <div class="image">
+                    {% if user_profile.image %}
+                        <img src="{{ user_profile.image.url }}" alt="Изображение профиля" class="ui medium rounded image">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300" alt="Изображение профиля" class="ui medium rounded image">
+                    {% endif %}
+                </div>
+                <div class="content">
+                    <a class="header">{{ user_profile.user.get_full_name }}</a>
+                    <div class="meta">
+                        <span>Дата создания: {{ user_profile.created|date:"d.m.Y" }}</span><br>
+                        <span>Последнее обновление: {{ user_profile.updated|date:"d.m.Y" }}</span>
+                    </div>
+                    <div class="description" style="margin-top: 10px;">
+                        <p><strong>Отчество:</strong> {{ user_profile.user.patronymic }}</p>
+                        <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a href="#" class="ui primary button fluid">Редактировать профиль</a>
+                </div>
+            </div>
+
+            <div class="ui message" style="margin-top: 20px;">
+                <a href="{% url 'account:logout' %}" class="ui red button">Выйти</a>
+            </div>
+
+            <!-- Дополнительная информация -->
+            <h3 class="ui header">Дополнительная информация</h3>
+            <div class="ui grid">
+                <div class="four wide column">
+                    <h4>Навыки</h4>
+                    <ul>
+                        {% for skill in user_profile.skills.all %}
+                            <li>{{ skill.name }}</li>
+                        {% empty %}
+                            <li>Нет навыков</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="four wide column">
+                    <h4>Проекты</h4>
+                    <ul>
+                        {% for project in user_profile.projects.all %}
+                            <li>{{ project.name }}</li>
+                        {% empty %}
+                            <li>Нет проектов</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="four wide column">
+                    <h4>Контакты</h4>
+                    <p><strong>Телефон:</strong> {{ user_profile.phone_number|default:"Не указано" }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Календарь -->
+        <div class="four wide column">
+            <h3 class="ui header">Календарь Январь 2025</h3>
+            <div class="ui calendar" style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+                <!-- Календарь для января 2025 -->
+                <table style="width: 100%; text-align: center;">
+                    <thead>
+                        <tr>
+                            <th colspan="7">Январь 2025</th>
+                        </tr>
+                        <tr>
+                            <th>Пн</th>
+                            <th>Вт</th>
+                            <th>Ср</th>
+                            <th>Чт</th>
+                            <th>Пт</th>
+                            <th>Сб</th>
+                            <th>Вс</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Первая неделя -->
+                        <tr>
+                            <td></td> <!-- Пустой день -->
+                            <td></td> <!-- Пустой день -->
+                            <td>1</td> <!-- Новый год -->
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                        </tr>
+                        <!-- Вторая неделя -->
+                        <tr>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <!-- Третья неделя -->
+                        <tr>
+                            <td>13</td>
+                            <td>14</td>
+                            <td>15</td>
+                            <td>16</td>
+                            <td>17</td>
+                            <td>18</td>
+                            <td>19</td>
+                        </tr>
+                        <!-- Четвертая неделя -->
+                        <tr>
+                            <td>20</td>
+                            <td>21</td>
+                            <td>22</td>
+                            <td>23</td>
+                            <td>24</td>
+                            <td>25</td>
+                            <td>26</td>
+                        </tr>
+                        <!-- Пятая неделя -->
+                        <tr>
+                            <td>27</td>
+                            <td>28</td>
+                            <td>29</td><!-- Пустые дни для завершения месяца -->
+                            <td>30</td><!-- Пустые дни для завершения месяца -->
+                            <td>31</td><!-- Пустые дни для завершения месяца -->
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
