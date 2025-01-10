@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Календарь рабочих дней
+{% endblock title %}
+
+{% block content %}
+    <h2>Добавить рабочий день</h2>
+    <form method="post">
+        {{form.as_p}}
+        {% csrf_token %}
+        <button type="submit" class="ui primary button">Сохранить изменения</button>
+    </form>
+
+    <h2 style="margin-top: 30px;">Рабочие дни:</h2>
+    <table class="ui celled table">
+        <thead>
+            <tr><th>Дата</th><th>Статус</th></tr>
+        </thead>
+        <tbody>
+            {% for day, is_working in work_days_dict.items %}
+                <tr>
+                    <td>{{ day }}</td>
+                    <td>{% if is_working %}Рабочий{% else %}Выходной{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}
+

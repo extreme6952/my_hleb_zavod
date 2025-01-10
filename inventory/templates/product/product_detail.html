@@ -1,32 +1,58 @@
 {% extends "base.html" %}
 
-{% block title %} {{ product.name }} {% endblock title %}
+{% block title %}{{ product.name }}{% endblock title %}
 
 {% block content %}
-    <div class="ui container">
-        <h1 class="ui header">{{ product.name }}</h1>
-        
-        <div class="ui stackable grid">
-            <div class="eight wide column">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="ui fluid image">
-            </div>
-            <div class="eight wide column">
-                <h2 class="ui header">Описание</h2>
-                <p>{{ product.text }}</p>
-                <h3 class="ui header">Цена: {{ product.price|floatformat:2 }} ₽</h3>
-                <div class="ui buttons">
-                    <button class="ui primary button">Добавить в корзину</button>
-                    <button class="ui button">Купить сейчас</button>
-                </div>
+<div class="ui container" style="margin-top: 20px;">
+    <h1 class="ui header">{{ product.name }}</h1>
+    
+    <div class="ui stackable grid">
+        <div class="eight wide column">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="ui fluid image">
+        </div>
+        <div class="eight wide column">
+            <h2 class="ui header">Описание</h2>
+            <p>{{ product.text }}</p>
+            <h3 class="ui header">Цена: {{ product.price|floatformat:2 }} ₽</h3>
+            <div class="ui buttons">
+                <button class="ui primary button">Добавить в корзину</button>
+                <button class="ui button">Купить сейчас</button>
             </div>
         </div>
-
-        <h2 class="ui header">Характеристики</h2>
-        <ul class="ui list">
-            <li>Белки: {{ product.protein }} г</li>
-            <li>Жиры: {{ product.fat }} г</li>
-            <li>Калории: {{ product.callories }} ккал</li>
-            <li>Доступное количество: {{ product.quantity }}</li>
-        </ul>
     </div>
+
+    <h2 class="ui header" style="margin-top: 30px;">Характеристики</h2>
+    <ul class="ui list">
+        <li><strong>Белки:</strong> {{ product.protein }} г</li>
+        <li><strong>Жиры:</strong> {{ product.fat }} г</li>
+        <li><strong>Калории:</strong> {{ product.callories }} ккал</li>
+        <li><strong>Доступное количество:</strong> {{ product.quantity }}</li>
+    </ul>
+
+    <!-- Рекомендации по продуктам -->
+    <h2 class="ui header" style="margin-top: 30px;">Рекомендуемые продукты</h2>
+    <div class="ui four stackable cards">
+        {% for recommended_product in recommended_products %}
+            <div class="ui card">
+                <div class="image">
+                    <img src="{{ recommended_product.image.url }}" alt="{{ recommended_product.name }}">
+                </div>
+                <div class="content">
+                    <a class="header">{{ recommended_product.name }}</a>
+                    <div class="meta">
+                        <span class="category">{{ recommended_product.category.name }}</span>
+                    </div>
+                    <div class="description">
+                        {{ recommended_product.text|truncatewords:15 }}
+                    </div>
+                </div>
+                <div class="extra content">
+                    <span><strong>Цена:</strong> {{ recommended_product.price|floatformat:2 }} ₽</span><br>
+                    <a href="{{ recommended_product.get_absolute_url }}" class="ui button primary">Подробнее</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
 {% endblock content %}

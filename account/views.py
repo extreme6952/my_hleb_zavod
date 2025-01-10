@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from datetime import timedelta,datetime
 from .models import *
 from .forms import *
 
@@ -53,3 +54,45 @@ class ProfileUserDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         # Получаем профиль текущего пользователя
         return self.get_queryset().filter(user=self.request.user).first()
+    
+
+def add_work_date_user(request):
+    #получаем текущую дату и время.
+    today = datetime.today()
+    #Устанавливает день текущей даты в 1, тем самым получая первый день текущего месяца.
+    first_day_of_month = today.replace(day=1)
+    #Для получения последнего дня месяца
+    last_day_month = (first_day_of_month + timedelta(days=31)).replace(day=1) - timedelta(days=1)
+    #Сначала добавляется 31 день к первому дню месяца (это гарантирует, что мы перейдем в следующий месяц).
+    #Затем устанавливается день в 1, чтобы вернуться к первому дню следующего месяца.
+    #Наконец, вычитается один день (timedelta(days=1)), чтобы получить последний день текущего месяца.
+    
+    if request.method=='POST':
+        form = WorkSchecludeWorkDataForm(request.POST)
+        if form.is_valid():
+            work_scheclude = form.save(commit=False)
+            work_scheclude.user = request.user
+            work_scheclude.save()
+            return redirect('account:profile_worker')
+    else:
+        form = WorkSchecludeWorkDataForm()
+
+    work_days = WorkScheclude.objects.filter(user=request.user,
+                                            date__range=[
+                                                first_day_of_month,
+                                                last_day_month
+                                            ])
+
+    word_days_dict = {day.date.strftime("%d/%m/%Y"):day.is_working for day in work_days}
+
+    context = {
+        'work_days_dict':word_days_dict,
+        'form':form,
+        'first_day_of_month':first_day_of_month,
+        'last_day_of_month':last_day_month
+    }
+
+    return render(request,
+                'profile/work_days.html',
+                context)
+

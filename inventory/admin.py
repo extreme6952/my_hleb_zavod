@@ -3,5 +3,5 @@ from .models import *
 
 
 admin.site.register(Product)
-
 admin.site.register(Category)
+admin.site.register(Deportament)

@@ -11,10 +11,8 @@ class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     
     class Meta:
-
         model = User
         fields = ['username','first_name','last_name','password1','password2']
-
 
     def clean_email(self):
         data = self.cleaned_data["email"]
@@ -35,3 +33,9 @@ class UserRegistrationForm(UserCreationForm):
         profile.save()
 
         return user
+
+
+class WorkSchecludeWorkDataForm(forms.ModelForm):
+    class Meta:
+        model = WorkScheclude
+        fields = ['date','is_working']

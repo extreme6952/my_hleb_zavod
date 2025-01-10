@@ -11,3 +11,6 @@ class ProfileAdminModelAdmin(admin.ModelAdmin):
 class ProfileCompanyModelAdmin(admin.ModelAdmin):
     list_display = ['user']
     list_filter = ['created','updated',]
+
+
+admin.site.register(WorkScheclude)

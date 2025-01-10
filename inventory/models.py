@@ -100,4 +100,23 @@ class Product(models.Model):
                                                self.id])
     
 
+class Deportament(models.Model):
+
+    name = models.CharField(max_length=250)
+
+    slug = models.SlugField(max_length=250,
+                            unique=True,
+                            blank=True)
+
+    def __str__(self):
+        return self.name
+    
+    def save(self,*args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(unidecode(self.name))
+
+        return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("deportament_detail", args=[self.slug])
     

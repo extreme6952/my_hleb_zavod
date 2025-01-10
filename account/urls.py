@@ -9,5 +9,6 @@ urlpatterns = [
     path('logged-out/',LogoutView.as_view(template_name='registration/loggedd_out.html'),
          name='logout'),
     path('registration/',views.UserRegistrationView.as_view(),name="user_registration"),
-    path('profile-detail/',views.ProfileUserDetailView.as_view(),name='profile_worker')
+    path('profile-detail/',views.ProfileUserDetailView.as_view(),name='profile_worker'),
+    path('working-day-calendar/',views.add_work_date_user,name='working_day_call')
 ]

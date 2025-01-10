@@ -3,13 +3,12 @@
 {% block title %}Наши продукты{% endblock title %}
 
 {% block content %}
-
 <div class="ui container" style="margin-top: 20px;">
     <h1 class="ui header">Наши продукты</h1>
     <div class="ui grid">
         {% for product in products %}
             <div class="four wide column">
-                <div class="ui card">
+                <div class="ui raised card" style="transition: transform 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
                     <div class="image">
                         <img src="{{ product.image.url }}" alt="{{ product.name }}">
                     </div>
@@ -29,11 +28,12 @@
                         <span><strong>Жиры:</strong> {{ product.fat }} г</span><br>
                         <span><strong>Калории:</strong> {{ product.callories }} ккал</span>
                     </div>
-                    <div class="extra content">
-                        <a href="{{product.get_absolute_url}}" class="ui button primary">Подробнее</a>
+                    <div class="extra content" style="text-align: center;">
+                        <a href="{{ product.get_absolute_url }}" class="ui button primary">Подробнее</a>
                     </div>
                 </div>
             </div>
+
         {% endfor %}
     </div>
 
@@ -43,5 +43,17 @@
         </div>
     {% endif %}
 </div>
+
+<script type="text/javascript">
+    // Эффект наведения на карточки
+    $('.ui.card').hover(
+        function() {
+            $(this).css('transform', 'scale(1.05)');
+        }, 
+        function() {
+            $(this).css('transform', 'scale(1)');
+        }
+    );
+</script>
 
 {% endblock content %}
