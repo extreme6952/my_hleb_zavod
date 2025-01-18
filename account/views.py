@@ -53,9 +53,13 @@ class ProfileUserDetailView(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         # Получаем профиль текущего пользователя
-        return self.get_queryset().filter(user=self.request.user).first()
-    
+        obj = self.get_queryset().filter(user=self.request.user).first()
+        print({obj})
+        return obj
 
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+    
 def add_work_date_user(request):
     #получаем текущую дату и время.
     today = datetime.today()

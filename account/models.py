@@ -34,10 +34,6 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE,
                                 related_name='profile_user')
     
-    departament = models.ForeignKey(Deportament,
-                                    on_delete=models.CASCADE,
-                                    related_name='user_profile_deportament')
-    
     position = models.CharField(max_length=250)
 
     created = models.DateField(auto_now_add=True)
