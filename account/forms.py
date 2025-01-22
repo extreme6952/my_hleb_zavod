@@ -3,6 +3,7 @@ from django.forms import modelformset_factory
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.forms.models import inlineformset_factory
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -39,3 +40,16 @@ class WorkSchecludeWorkDataForm(forms.ModelForm):
     class Meta:
         model = WorkScheclude
         fields = ['date','is_working']
+
+
+#сделать методы для email
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username','last_name','first_name','email']
+
+
+class UserProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']

@@ -1,15 +1,15 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect,render,get_object_or_404
 from django.contrib import messages
-from django.views.generic.edit import CreateView,DeleteView,UpdateView
-from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView,DeleteView,UpdateView,FormView
 from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateResponseMixin
-from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import ListView
+from django.views.generic import View
 from datetime import timedelta,datetime
 from .models import *
 from .forms import *
-
+from django.contrib import messages
 
 class UserRegistrationView(TemplateResponseMixin,View):
 
@@ -100,3 +100,46 @@ def add_work_date_user(request):
                 'profile/work_days.html',
                 context)
 
+
+class UserEditFormViews(LoginRequiredMixin,View):
+
+    template_name = 'profile/profile_edit_user.html'
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def get(self,request,*args, **kwargs):
+        user_form = UserEditForm(instance=request.user) 
+        profile_form = UserProfileEditForm(instance=request.user.profile_user)
+        
+        return render(request,
+                      self.template_name,
+                      {'user_form':user_form,
+                       'profile_form':profile_form,
+                       })
+    
+    def post(self,request,*args, **kwargs):
+
+        user_form = UserEditForm(request.POST,
+                                 instance=request.user)
+        profile_form = UserProfileEditForm(request.POST,
+                                           files=request.FILES,
+                                           instance=request.user.profile_user,)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request,
+                             'Ваши данные были успешно изменены!!!')
+
+            return redirect('account:profile_worker')
+        else:
+            messages.error(request,
+                           'При заполнении данных произошла ошибка,повторите попытку.(')
+
+        return render(request,
+                      self.template_name,
+                      {'user_form':user_form,
+                       'profile_form':profile_form,
+                       })

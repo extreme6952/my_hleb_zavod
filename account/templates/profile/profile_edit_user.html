@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %} Profile Edit User {% endblock title %}
+
+{% block content %}
+<div class="ui container">
+    <h2 class="ui header">Edit Profile</h2>
+    <form class="ui form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <h3 class="ui dividing header">User Information</h3>
+        <div class="fields">
+            <div class="six wide field">
+                <label for="{{ user_form.username.id_for_label }}">
+                    <i class="user icon"></i> Username
+                </label>
+                {{ user_form.username }}
+                {{ user_form.username.errors }}
+            </div>
+            <div class="six wide field">
+                <label for="{{ user_form.email.id_for_label }}">
+                    <i class="envelope icon"></i> Email
+                </label>
+                {{ user_form.email }}
+                {{ user_form.email.errors }}
+            </div>
+        </div>
+        <div class="fields">
+            <div class="six wide field">
+                <label for="{{ user_form.first_name.id_for_label }}">
+                    <i class="pencil alternate icon"></i> First Name
+                </label>
+                {{ user_form.first_name }}
+                {{ user_form.first_name.errors }}
+            </div>
+            <div class="six wide field">
+                <label for="{{ user_form.last_name.id_for_label }}">
+                    <i class="pencil alternate icon"></i> Last Name
+                </label>
+                {{ user_form.last_name }}
+                {{ user_form.last_name.errors }}
+            </div>
+        </div>
+
+        <h3 class="ui dividing header">Profile Information</h3>
+        <div class="fields">
+            <div class="six wide field">
+                <label for="{{ profile_form.image.id_for_label }}">
+                    <i class="image icon"></i> Avatar
+                </label>
+                {{ profile_form.image }}
+                {{ profile_form.image.errors }}
+
+                <!-- Image preview -->
+                <div id="image-preview" style="margin-top: 10px;">
+                    <img id="avatar-preview" src="#" alt="Avatar Preview" style="display:none; max-width: 100%;"/>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save button -->
+        <button class="ui button primary fluid" type="submit">Save Changes</button>
+
+        <!-- Cancel button -->
+        <a href="{% url 'account:profile_worker' %}" class="ui button">Cancel</a>
+    </form>
+</div>
+
+<style>
+    /* Custom styles for better spacing and aesthetics */
+    .ui.container {
+        margin-top: 20px;
+    }
+    .ui.header {
+        margin-bottom: 20px;
+    }
+    .fields .field {
+        margin-bottom: 15px; /* Add space between fields */
+    }
+    .error.message {
+        color: red; /* Make error messages red */
+    }
+</style>
+
+<script>
+// JavaScript to handle image preview
+document.getElementById('id_image').addEventListener('change', function(event) {
+    const reader = new FileReader();
+    reader.onload = function(){
+        const output = document.getElementById('avatar-preview');
+        output.src = reader.result;
+        output.style.display = 'block'; // Show the image preview
+    }
+    reader.readAsDataURL(event.target.files[0]);
+});
+</script>
+
+{% endblock content %}
