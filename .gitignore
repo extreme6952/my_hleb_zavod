@@ -1,6 +1,6 @@
 # Игнорируем папки и файлы, созданные collectstatic
-/static/
-/staticfiles/
+my_hleb_zavod/static/
+staticfiles/
 
 node_modules/
 
