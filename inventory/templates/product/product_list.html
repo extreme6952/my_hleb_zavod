@@ -10,7 +10,9 @@
             <div class="four wide column">
                 <div class="ui raised card" style="transition: transform 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
                     <div class="image">
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% endif %}
                     </div>
                     <div class="content">
                         <a class="header">{{ product.name }}</a>
@@ -25,7 +27,8 @@
                         <span><strong>Цена:</strong> {{ product.price }} руб.</span><br>
                         <span><strong>Количество:</strong> {{ product.quantity }} шт.</span><br>
                         <span><strong>Белки:</strong> {{ product.protein }} г</span><br>
-                        <span><strong>Жиры:</strong> {{ product.fat }} г</span><br>
+                        <span><strong>Углеводы:</strong> {{ product.carbohydrates }}</span><br>
+                        <span><strong>Жиры:</strong> {{ product.fats }} г</span><br>
                         <span><strong>Калории:</strong> {{ product.callories }} ккал</span>
                     </div>
                     <div class="extra content" style="text-align: center;">

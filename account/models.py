@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.utils import timezone
 from unidecode import unidecode
-from inventory.models import Deportament
 
 
 # Связь "один ко многим" в данном контексте означает, 

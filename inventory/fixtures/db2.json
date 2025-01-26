@@ -1,0 +1,202 @@
+[
+  {
+      "model": "inventory.category",
+      "fields": {
+          "name": "Хлеб",
+          "slug": "hleb",
+          "image": null
+      }
+  },
+  {
+      "model": "inventory.category",
+      "fields": {
+          "name": "Булки",
+          "slug": "bulki",
+          "image": null
+      }
+  },
+  {
+      "model": "inventory.category",
+      "fields": {
+          "name": "Пирожки",
+          "slug": "pirojki",
+          "image": null
+      }
+  },
+  {
+      "model": "inventory.category",
+      "fields": {
+          "name": "Кексы",
+          "slug": "keksi",
+          "image": null
+      }
+  },
+  {
+      "model": "inventory.category",
+      "fields": {
+          "name": "Торты",
+          "slug": "torty",
+          "image": null
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Бородинский хлеб",
+          "product_category": 1,
+          "slug": "borodinskiy-hleb",
+          "image": null,
+          "text": "Традиционный русский хлеб",
+          "price": 50.00,
+          "protein": 10,
+          "fats": 5,
+          "callories": 250,
+          "created": "2023-01-01",
+          "updated": "2023-01-01"
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Ржаной хлеб",
+          "product_category": 1,
+          "slug": "rzhanyy-hleb",
+          "image": null,
+          "text": "Хлеб из ржаной муки",
+          "price": 45.00,
+          "protein": 8,
+          "fats": 4,
+          "callories": 230,
+          "created": "2023-01-02",
+          "updated": "2023-01-02"
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Булка с маком",
+          "product_category": 2,
+          "slug": "bulka-s-makom",
+          "image": null,
+          "text": "Сладкая булка с маком",
+          "price": 30.00,
+          "protein": 6,
+          "fats": 3,
+          "callories": 200,
+          "created": "2023-01-03",
+          "updated": "2023-01-03"
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Булка с изюмом",
+          "product_category": 2,
+          "slug": "bulka-s-izyumom",
+          "image": null,
+          "text": "Сладкая булка с изюмом",
+          "price": 35.00,
+          "protein": 5,
+          "fats": 4,
+          "callories": 210,
+          "created": "2023-01-04",
+          "updated": "2023-01-04"
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Пирожок с мясом",
+          "product_category": 3,
+          "slug": "pirojok-s-myasom",
+          "image": null,
+          "text": "Пирожок с мясной начинкой",
+          "price": 40.00,
+          "protein": 15,
+          "fats": 10,
+          "callories": 300,
+          "created": "2023-01-05",
+          "updated": "2023-01-05"
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Пирожок с яблоками",
+          "product_category": 3,
+          "slug": "pirojok-s-yablokami",
+          "image": null,
+          "text": "Сладкий пирожок с яблоками",
+          "price": 25.00,
+          "protein": 4,
+          "fats": 2,
+          "callories": 180,
+          "created": "2023-01-06",
+          "updated": "2023-01-06"
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Шоколадный кекс",
+          "product_category": 4,
+          "slug": "shokoladniy-keks",
+          "image": null,
+          "text": "Кекс с шоколадной начинкой",
+          "price": 60.00,
+          "protein": 8,
+          "fats": 12,
+          "callories": 320,
+          "created": "2023-01-07",
+          "updated": "2023-01-07"
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Ванильный кекс",
+          "product_category": 4,
+          "slug": "vanilniy-keks",
+          "image": null,
+          "text": "Кекс с ванильной начинкой",
+          "price": 55.00,
+          "protein": 7,
+          "fats": 10,
+          "callories": 290,
+          "created": "2023-01-08",
+          "updated": "2023-01-08"
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Тирамису",
+          "product_category": 5,
+          "slug": "tiramisu",
+          "image": null,
+          "text": "Классический итальянский торт",
+          "price": 100.00,
+          "protein": 10,
+          "fats": 15,
+          "callories": 350,
+          "created": "2023-01-09",
+          "updated": "2023-01-09"
+      }
+  },
+  {
+      "model": "inventory.product",
+      "fields": {
+          "name": "Наполеон",
+          "product_category": 5,
+          "slug": "napoleon",
+          "image": null,
+          "text": "Традиционный русский торт",
+          "price": 120.00,
+          "protein": 12,
+          "fats": 18,
+          "callories": 380,
+          "created": "2023-01-10",
+          "updated": "2023-01-10"
+      }
+  }
+]
