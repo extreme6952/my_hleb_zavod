@@ -1,21 +1,47 @@
-# Игнорируем папки и файлы, созданные collectstatic
-my_hleb_zavod/static/
-staticfiles/
-
-node_modules/
-
-# Игнорируем файлы базы данных SQLite
-
-
-# Игнорируем файлы среды разработки
-.env
-.pycache/
+# Python
+*.py[cod]
 __pycache__/
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
 
-# Игнорируем виртуальные окружения
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Среда разработки
+.env
+.venv/
 venv/
 env/
+ENV/
+env.bak/
+venv.bak/
 
-# Игнорируем другие временные файлы
-*.pyc
-.DS_Store
+# Папки с временными файлами и кэшами
+media/
+staticfiles/
+static/
+
+# Папка с миграциями (если вы не хотите отслеживать миграции)
+# migrations/
+
+# Исключение файлов конфигурации IDE (например, PyCharm)
+.idea/
+
+# Исключение файлов конфигурации VS Code
+.vscode/
+
+# Другие временные файлы и папки
+*.swp
+*~
