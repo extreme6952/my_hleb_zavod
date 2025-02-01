@@ -1,9 +1,11 @@
+import os
+import barcode
+from barcode.writer import SVGWriter
 from django.db import models
 from django.utils.text import slugify
 from unidecode import unidecode
 from django.urls import reverse
 from easy_thumbnails.fields import ThumbnailerImageField
-
 
 class Category(models.Model):
 
@@ -47,7 +49,8 @@ class Product(models.Model):
                                  on_delete=models.CASCADE,
                                  name='product_category')
     
-    name = models.CharField(max_length=250)
+    name = models.CharField(max_length=250,
+                            unique=True)
 
     slug = models.SlugField(max_length=250,
                             unique=True,
@@ -74,6 +77,10 @@ class Product(models.Model):
 
     updated = models.DateField(auto_now=True)
 
+    barcode = models.CharField(max_length=250,
+                               blank=True,
+                               null=True)
+
     class Meta:
         ordering = ['-created']
         indexes = [
@@ -84,14 +91,34 @@ class Product(models.Model):
         return self.name
     
     def save(self,*args, **kwargs):
-        
-        self.callories = (self.carbohydrates*4)+(self.protein*4)+(self.fats*4) 
-        
-        if not self.slug:
+
+        if not self.callories:
+            self.callories = (self.carbohydrates*4)+(self.protein*4)+(self.fats*9)
+        elif not self.slug:
             self.slug = slugify(unidecode(self.name))
-        return super().save(*args, **kwargs)
-    
+        elif not self.barcode:
+            self.barcode = str(self.id)
+ 
+        super().save(*args, **kwargs)
+
+        self.generate_barcode()
+
     def get_absolute_url(self):
         return reverse("product_detail", args=[self.slug,
                                                self.id])
     
+    def generate_barcode(self):
+        code = barcode.get('code128',str(self.id),
+                        writer = SVGWriter()) 
+        #Сохраняем файл, в текущую дерикторию media/save/barcode/
+        barcode_directory = os.path.join('media','save','barcode')
+
+        if not os.path.join('media','save','barcode'):
+            os.makedirs(barcode_directory)
+
+        filename = os.path.join(barcode_directory,
+                                f'barcode_{unidecode(self.name)}_{self.id}')   
+        code.save(filename)
+
+
+
