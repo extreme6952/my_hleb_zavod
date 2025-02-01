@@ -94,31 +94,20 @@ class Product(models.Model):
 
         if not self.callories:
             self.callories = (self.carbohydrates*4)+(self.protein*4)+(self.fats*9)
-        elif not self.slug:
+        
+        if not self.slug:
             self.slug = slugify(unidecode(self.name))
-        elif not self.barcode:
+
+        if not self.barcode:
+
             self.barcode = str(self.id)
  
         super().save(*args, **kwargs)
-
-        self.generate_barcode()
 
     def get_absolute_url(self):
         return reverse("product_detail", args=[self.slug,
                                                self.id])
     
-    def generate_barcode(self):
-        code = barcode.get('code128',str(self.id),
-                        writer = SVGWriter()) 
-        #Сохраняем файл, в текущую дерикторию media/save/barcode/
-        barcode_directory = os.path.join('media','save','barcode')
-
-        if not os.path.join('media','save','barcode'):
-            os.makedirs(barcode_directory)
-
-        filename = os.path.join(barcode_directory,
-                                f'barcode_{unidecode(self.name)}_{self.id}')   
-        code.save(filename)
 
 
 

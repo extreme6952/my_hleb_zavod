@@ -23,7 +23,7 @@ class ProductDetailView(LoginRequiredMixin,View):
 
 class ProductUpdateView(TemplateResponseMixin, LoginRequiredMixin, View):
     product = None
-    template_name = 'product/update_product_database.html'
+    template_name = 'product/forms_files_template/update_product_database.html'
 
     def get_form(self, data=None, files=None):
         return UpdateProductInformationForm(instance=self.product, data=data, files=files)
@@ -53,3 +53,32 @@ class ProductUpdateView(TemplateResponseMixin, LoginRequiredMixin, View):
             'product': self.product,
             'form': form,
         })
+
+
+class ProductCreateView(LoginRequiredMixin,TemplateResponseMixin,View):
+
+    template_name = 'product/forms_files_template/create_product_form.html'
+    
+    def get_form(self,data=None,files=None):
+
+        return ProductCreateForm(data=data,
+                                 files=files)
+    
+    def get(self,*args, **kwargs):
+
+        form = self.get_form()
+        return self.render_to_response(
+            {'form':form}
+        )
+    
+    def post(self,request,*args, **kwargs):
+        
+        form = self.get_form(data=request.POST,
+                             files=request.FILES)
+        
+        if form.is_valid():
+            form.save()
+
+        return self.render_to_response(
+            {'form':form}
+        )

@@ -75,3 +75,11 @@ class UpdateProductInformationForm(forms.ModelForm):
         )
 
         self.fields['carbohydrates'].label = 'Углеводы'
+
+
+class ProductCreateForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['product_category','name',
+                  'image','text','price',
+                  'protein','carbohydrates','fats']
