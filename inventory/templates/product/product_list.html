@@ -25,11 +25,11 @@
                     </div>
                     <div class="extra content">
                         <span><strong>Цена:</strong> {{ product.price }} руб.</span><br>
-                        <span><strong>Количество:</strong> {{ product.quantity }} шт.</span><br>
+                        {% comment %} <span><strong>Количество:</strong> {{ product.quantity }} шт.</span><br>
                         <span><strong>Белки:</strong> {{ product.protein }} г</span><br>
                         <span><strong>Углеводы:</strong> {{ product.carbohydrates }}</span><br>
                         <span><strong>Жиры:</strong> {{ product.fats }} г</span><br>
-                        <span><strong>Калории:</strong> {{ product.callories }} ккал</span>
+                        <span><strong>Калории:</strong> {{ product.callories }} ккал</span> {% endcomment %}
                     </div>
                     <div class="extra content" style="text-align: center;">
                         <a href="{{ product.get_absolute_url }}" class="ui button primary">Подробнее</a>
